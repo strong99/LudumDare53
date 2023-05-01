@@ -1,0 +1,105 @@
+﻿id: Road
+root: 
+  id: root
+  position: { x: 640, y: 720 }
+  children:
+  - id: layerSky
+    order: 0
+    components:
+    - $type: SimpleSideScrollingFollowComponent
+      follow: ../layerPlay/player
+      scale: 0.1
+    - $type: SimpleSideScrollingTileComponent
+      tiles:
+      - width: 1280
+        components:
+        - $type: ImageComponent
+          texture: Tiles/Sky/01
+          origin: { x: 0.5, y: 1 }
+  - id: layerFar
+    order: 20
+    components:
+    - $type: SimpleSideScrollingFollowComponent
+      follow: ../layerPlay/player
+      scale: 0.3
+    - $type: SimpleSideScrollingTileComponent
+      tiles:
+      - width: 1280
+        components:
+        - $type: ImageComponent
+          texture: Tiles/Far/01
+          origin: { x: 0.5, y: 1 }
+  - id: layerMedium
+    order: 40
+    components:
+    - $type: SimpleSideScrollingFollowComponent
+      follow: ../layerPlay/player
+      scale: 0.6
+    - $type: SimpleSideScrollingTileComponent
+      tiles:
+      - width: 1280
+        components:
+        - $type: ImageComponent
+          texture: Tiles/Medium/01
+          origin: { x: 0.5, y: 1 }
+  - id: layerPlay
+    order: 60
+    components:
+    - $type: SimpleSideScrollingFollowComponent
+      offset: { x: -400, y: 0 }
+      follow: player
+      scale: 1
+    children:
+    - id: visuals
+      components:
+      - $type: SimpleSideScrollingTileComponent
+        tiles:
+        - width: 1280
+          weight: 10
+          components:
+          - $type: ImageComponent
+            texture: Tiles/Play/01
+            origin: { x: 0.5, y: 1 }
+        - width: 1280
+          weight: 4
+          components:
+          - $type: ImageComponent
+            texture: Tiles/Play/03
+            origin: { x: 0.5, y: 1 }
+        - width: 1280
+          weight: 2
+          components:
+          - $type: ImageComponent
+            texture: Tiles/Play/04
+            origin: { x: 0.5, y: 1 }
+        - width: 1280
+          weight: 5
+          components:
+          - $type: ImageComponent
+            texture: Tiles/Play/05
+            origin: { x: 0.5, y: 1 }
+    - Shared/RoadPlayer
+    - Shared/RoadGameController
+    - Shared/RoadLineManager
+  - id: layerNear
+    order: 100
+    components:
+    - $type: SimpleSideScrollingFollowComponent
+      follow: ../layerPlay/player
+      scale: 1.5
+    - $type: SimpleSideScrollingTileComponent
+      tiles:
+      - width: 1280
+        components:
+        - $type: ImageComponent
+          texture: Tiles/Near/01
+          origin: { x: 0.5, y: 1 }
+      - width: 1280
+        components:
+        - $type: ImageComponent
+          texture: Tiles/Near/02
+          origin: { x: 0.5, y: 1 }
+  - Shared/RoadUI
+  components:
+  - $type: MusicComponent
+    song: Themes/RoadDefaultBackground  

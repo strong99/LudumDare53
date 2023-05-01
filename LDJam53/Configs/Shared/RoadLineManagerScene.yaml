@@ -1,0 +1,72 @@
+﻿id: RoadLineManager
+root: 
+  id: lineManager
+  enabled: false
+  components:
+  - $type: LineManagerComponent
+    count: 4
+    obstacles:
+    - width: 128
+      weight: 0.75
+      difficulty: 0 
+      lanesHeight: 1
+      order: 10
+      origin: { x: 0.5, y: 1 }
+      components: 
+      - $type: ImageComponent
+        texture: Props/Rock-01
+        origin: { x: 0.5, y: 1 }
+    - width: 128
+      weight: 0.8
+      difficulty: 0 
+      lanesHeight: 1
+      order: 10
+      origin: { x: 0.5, y: 1 }
+      components: 
+      - $type: ImageComponent
+        texture: Props/Rock-02
+        origin: { x: 0.5, y: 1 }
+    - width: 544
+      weight: 0.25
+      difficulty: 1
+      lanesHeight: 1
+      order: 10
+      origin: { x: 0.8, y: 1 }
+      children:
+      - id: cart
+        position: { x: -240, y: 0 }
+        components: 
+        - $type: AnimatedImageComponent
+          duration: 100
+          loop: true
+          textures:
+          - Props/farmer-with-cart-1
+          - Props/farmer-with-cart-2
+          - Props/farmer-with-cart-3
+          origin: { x: 0.5, y: 1 }
+      components: 
+      - $type: AnimatedImageComponent
+        duration: 100
+        loop: true
+        textures:
+        - Characters/Npc_Walk_01
+        - Characters/Npc_Walk_02
+        - Characters/Npc_Walk_03
+        - Characters/Npc_Walk_04
+        origin: { x: 0.5, y: 1 }
+      - $type: StateComponent
+        set: Cart
+        state: Default
+    - width: 88
+      weight: 0.5
+      difficulty: 1
+      lanesHeight: 1
+      order: 10
+      origin: { x: 0.5, y: 1 }
+      components: 
+      - $type: ImageComponent
+        texture: Props/Rabbit
+        origin: { x: 0.5, y: 1 }
+      - $type: StateComponent
+        set: Rabbit
+        state: Idle

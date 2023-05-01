@@ -1,0 +1,213 @@
+﻿id: Town
+root: 
+  id: root
+  position: { x: 640, y: 720 }
+  children:
+  - id: layerSky
+    order: 0
+    components:
+    - $type: SimpleSideScrollingFollowComponent
+      follow: ../layerPlay/player
+      scale: 0.1
+    - $type: SimpleSideScrollingTileComponent
+      tiles:
+      - width: 1280
+        components:
+        - $type: ImageComponent
+          texture: Tiles/Sky/01
+          origin: { x: 0.5, y: 1 }
+  - id: layerFar
+    order: 20
+    components:
+    - $type: SimpleSideScrollingFollowComponent
+      follow: ../layerPlay/player
+      scale: 0.3
+    - $type: SimpleSideScrollingTileComponent
+      tiles:
+      - width: 1280
+        components:
+        - $type: ImageComponent
+          texture: Tiles/Far/01
+          origin: { x: 0.5, y: 1 }
+  - id: layerMedium
+    order: 40
+    components:
+    - $type: SimpleSideScrollingFollowComponent
+      follow: ../layerPlay/player
+      scale: 0.6
+    - $type: SimpleSideScrollingTileComponent
+      tiles:
+      - width: 1280
+        components:
+        - $type: ImageComponent
+          texture: Tiles/Medium/01
+          origin: { x: 0.5, y: 1 }
+  - id: layerPlay
+    order: 60
+    components:
+    - $type: SimpleSideScrollingFollowComponent
+      follow: player
+      scale: 1
+    children:
+    - position: { x: -640, Y: 0 }
+      components:
+      - $type: ImageComponent
+        texture: Tiles/Play/02
+        origin: { x: 0.5, y: 1 }
+    - position: { x: 640, Y: 0 }
+      components:
+      - $type: ImageComponent
+        texture: Tiles/Play/02
+        origin: { x: 0.5, y: 1 }
+    - position: { x: -1920, Y: 0 }
+      components:
+      - $type: ImageComponent
+        texture: Tiles/Play/02fence
+        origin: { x: 0.5, y: 1 }
+    - position: { x: 1920, Y: 0 }
+      components:
+      - $type: ImageComponent
+        texture: Tiles/Play/02fence
+        origin: { x: 0.5, y: 1 }
+    - id: player
+      components:
+      - $type: QuestTakerComponent
+      - $type: DepthOrderComponent
+      - $type: StateComponent
+        set: Player
+        state: FreeRoam
+      - $type: PlayerComponent
+        score: 22
+        deliveries: 11
+      - $type: AnimatedImageComponent
+        textures: 
+        - Characters/Player
+        origin: { x: 0.5, y: 1 }
+    - id: npc1
+      position: { x: 250, y: -60 }
+      components:
+      - $type: DepthOrderComponent
+      - $type: QuestComponentConfig
+        destination: Town
+        route: Road
+        score: 23
+      - $type: ActorComponent
+        name: Owhlor
+      - $type: ImageComponent
+        texture: Characters/Npc
+        origin: { x: 0.5, y: 1 }
+    - id: npc2
+      position: { x: -400, y: -40 }
+      components:
+      - $type: DepthOrderComponent
+      - $type: QuestComponentConfig
+        destination: Town
+        route: Road
+        score: 23
+      - $type: ActorComponent
+        name: Yarng
+      - $type: ImageComponent
+        texture: Characters/Npc
+        origin: { x: 0.5, y: 1 }
+  - id: layerNear
+    order: 100
+    components:
+    - $type: SimpleSideScrollingFollowComponent
+      follow: ../layerPlay/player
+      scale: 1.5
+    - $type: SimpleSideScrollingTileComponent
+      tiles:
+      - width: 1280
+        components:
+        - $type: ImageComponent
+          texture: Tiles/Near/01
+          origin: { x: 0.5, y: 1 }
+  - id: UI
+    order: 100
+    scale: { x: 1, y: 1 }
+    children:
+    - id: ViewQuest
+      enabled: false
+      scale: { x: 1, y: 1 }
+      position: { x: 0, y: -360 }
+      children:
+      - id: lblTitle
+        position: { x: 0, y: -170 }
+        components:
+        - $type: TextComponent
+          origin: { x: 0.5, y: 1 }
+          text: Quest
+          font: default
+          tint: white
+      - id: lblFrom
+        position: { x: 120, y: -100 }
+        components:
+        - $type: TextComponent
+          origin: { x: 0, y: 0.5 }
+          text: "KnightRex\nEuropa"
+          font: default
+          tint: white
+      - id: lblTo
+        position: { x: 120, y: -20 }
+        components:
+        - $type: TextComponent
+          origin: { x: 0, y: 0.5 }
+          text: "KnightRex\nEuropa"
+          font: default
+          tint: white
+      - id: lblLevel
+        position: { x: 120, y: 55 }
+        components:
+        - $type: TextComponent
+          origin: { x: 0, y: 0.5 }
+          text: "KnightRex\nEuropa"
+          font: default
+          tint: white
+      - id: lblScore
+        position: { x: 120, y: 130 }
+        components:
+        - $type: TextComponent
+          origin: { x: 0, y: 0.5 }
+          text: "+31"
+          font: default
+          tint: white
+      components:
+      - $type: ImageComponent
+        origin: { x: 0.5, y: 0.5 }
+        texture: Panels/Quest
+        tint: white
+    - id: stats
+      children:
+      - id: deliveriesMade
+        position: { x: -580, y: -680 }
+        components:
+        - $type: ImageComponent
+          texture: Panels/DeliveryBar
+          origin: { x: 0.2, y: 0.5 }
+        - $type: TextComponent
+          origin: { x: 0, y: 0.5 }
+          text: ??
+          font: default
+          tint: black
+        - $type: SetTextComponent
+          sourceComponent: PlayerComponent
+          sourceNode: //layerPlay/player
+          sourceProperty: Deliveries
+      - id: coinsMade
+        position: { x: -580, y: -620 }
+        components:
+        - $type: ImageComponent
+          texture: Panels/EarnedCoinBar
+          origin: { x: 0.2, y: 0.5 }
+        - $type: TextComponent
+          origin: { x: 0, y: 0.5 }
+          text: ??
+          font: default
+          tint: black
+        - $type: SetTextComponent
+          sourceComponent: PlayerComponent
+          sourceNode: //layerPlay/player
+          sourceProperty: Score
+  components:
+  - $type: MusicComponent
+    song: Themes/TownDefaultBackground

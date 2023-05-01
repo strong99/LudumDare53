@@ -1,0 +1,65 @@
+﻿id: Road
+root: 
+  id: UI
+  order: 100
+  children:
+  - id: stats1
+    position: { x: 0, y: -660 }
+    components:
+    - $type: DisplayLevelProgressionImageComponent
+      origin: { x: 0.5, y: 0.5 }
+      backTexture: Panels/roadProgress
+      frontTexture: Panels/roadProgression
+      track: //layerPlay/player
+      distance: 15000
+    - $type: DisplayLevelProgressionTextComponent
+      template: "{0}/{1}m"
+      origin: { x: 0.5, y: 0.5 }
+      track: //layerPlay/player
+      distance: 15000
+  - id: stats2
+    children:
+    - id: rewardScore
+      position: { x: -580, y: -680 }
+      components:
+      - $type: ImageComponent
+        texture: Panels/ProfitBar
+        origin: { x: 0.2, y: 0.5 }
+      - $type: TextComponent
+        origin: { x: 0, y: 0.5 }
+        text: "2424"  
+        font: default
+        tint: black
+      - $type: SetTextComponent
+        sourceComponent: QuestComponent
+        sourceNode: //
+        sourceProperty: Score
+    - id: rewardScorePenalty
+      position: { x: -480, y: -680 }
+      components:
+      - $type: TextComponent
+        origin: { x: 0, y: 0.5 }
+        text: "2424"  
+        font: default
+        tint: black
+      - $type: SetTextComponent
+        template: "-{0}"
+        sourceComponent: QuestComponent
+        sourceNode: //
+        sourceProperty: Penalty
+    - id: earnedScore
+      position: { x: -580, y: -620 }
+      components:
+      - $type: ImageComponent
+        texture: Panels/DestinationBar
+        origin: { x: 0.2, y: 0.5 }
+      - $type: TextComponent
+        origin: { x: 0, y: 0.5 }
+        text: "2424"  
+        font: default
+        tint: black
+      - $type: SetTextComponent
+        sourceComponent: QuestComponent
+        sourceNode: //
+        sourceProperty: Destination
+     

@@ -1,0 +1,22 @@
+﻿sets:
+- id: Default    
+  states:
+  - id: Default
+    exits:
+    - destination: Play
+      conditions:
+      - $type: UserKeyboardInputEvent
+        key: accept
+        state: 2
+    - destination: Quit
+      conditions:
+      - $type: UserKeyboardInputEvent
+        key: quit
+        state: 2
+  - id: Play
+    activities:
+    - $type: LoadScene
+      scene: Town
+  - id: Quit
+    activities:
+    - $type: Quit

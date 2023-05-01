@@ -1,0 +1,20 @@
+﻿id: menu
+root:
+  id: root
+  components:
+  - $type: ImageComponent
+    texture: Cover
+  - $type: StateComponent
+    set: Default
+    state: Default
+  children:
+  - id: version
+    position: { x: 640, y: 700 }
+    components:
+    - $type: TextComponent
+      origin: { x: 0.5, y: 1 }
+      text: Press SPACE button to start
+      tint: "#ffe473"
+      font: Default
+    - $type: MusicComponent
+      song: Themes/TownDefaultBackground

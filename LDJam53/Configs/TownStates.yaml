@@ -1,0 +1,97 @@
+﻿sets:
+- id: Player
+  states: 
+  - id: FreeRoam
+    activities:
+    - $type: SetAnimation
+      target: //layerPlay/player
+      duration: 100
+      loop: true
+      textures:
+      - Characters/Player
+    exits:
+    - destination: ViewQuest
+      conditions: 
+      - $type: UserKeyboardInputEvent
+        key: accept
+        state: 2
+      - $type: InteractableActorFocussed
+    - destination: Menu
+      conditions:
+      - $type: UserKeyboardInputEvent
+        key: quit
+        state: 2
+    - destination: FreeRoamDo
+      conditions: 
+      - $type: UserKeyboardInputEvent
+        keys: [moveLeft,moveRight,moveUp,moveDown]
+        state: 2
+  - id: FreeRoamDo
+    activities: 
+    - $type: SetAnimation
+      target: //layerPlay/player
+      duration: 100
+      loop: true
+      textures:
+      - Characters/Player_Walk_01
+      - Characters/Player_Walk_02
+      - Characters/Player_Walk_03
+      - Characters/Player_Walk_04
+    - $type: FreeRoamRectangle
+      speed: 50
+      topLeft: { x: -1536, y: -140 }
+      bottomRight: { x: 1536, y: 80 }
+    exits:
+    - destination: FreeRoam
+      conditions: 
+      - $type: UserKeyboardInputEvent
+        keys: [moveLeft,moveRight,moveUp,moveDown]
+        state: 1
+    - destination: ViewQuest
+      conditions: 
+      - $type: UserKeyboardInputEvent
+        key: accept
+        state: 2
+      - $type: InteractableActorFocussed
+    - destination: Menu
+      conditions:
+      - $type: UserKeyboardInputEvent
+        key: quit
+        state: 2
+  - id: ViewQuest
+    activities:
+    - $type: SetQuestDetails
+      fromLabel: //UI/ViewQuest/lblFrom
+      toLabel: //UI/ViewQuest/lblTo
+      levelLabel: //UI/ViewQuest/lblLevel
+      scoreLabel: //UI/ViewQuest/lblScore
+    - $type: EnableNode
+      target: //UI/ViewQuest
+    exits:
+    - destination: AcceptQuest
+      conditions:
+      - $type: UserKeyboardInputEvent
+        key: accept
+        state: 2
+    - destination: CloseQuest
+      conditions:
+      - $type: UserKeyboardInputEvent
+        key: cancel
+        state: 2
+  - id: AcceptQuest
+    activities:
+    - $type: LoadSceneFromQuest
+      destination: false
+  - id: CloseQuest
+    activities:
+    - $type: EnableNode
+      target: //UI/ViewQuest
+      enabled: false
+    exits:
+      - destination: FreeRoam
+        conditions: 
+        - $type: OnStateFinished
+  - id: Menu
+    activities:
+    - $type: LoadScene
+      scene: Menu

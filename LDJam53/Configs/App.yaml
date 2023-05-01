@@ -1,0 +1,16 @@
+﻿startScene: Menu
+playerController: Human
+fullScreen: false
+resolution: { x: 1280, y: 720 }
+keys:
+  accept: [ Enter, Space ]
+  cancel: [ Escape, Back, Home, Del, End ]
+  quit: [ Escape ]
+  laneUp: [ Up ]
+  laneDown: [ Down ]
+  speedUp: [ Right ]
+  speedDown: [ Left ]
+  moveUp: [ Up ]
+  moveDown: [ Down ]
+  moveLeft: [ Left ]
+  moveRight: [ Right ]

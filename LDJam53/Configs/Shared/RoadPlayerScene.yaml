@@ -1,0 +1,19 @@
+﻿id: Road
+root: 
+  id: player
+  components:
+  - $type: StateComponent
+    set: Player
+    state: Default
+  - $type: PlayerComponent
+    score: 22
+    deliveries: 11
+  - $type: AnimatedImageComponent
+    textures: 
+    - Characters/Player
+    origin: { x: 0.5, y: 1 }
+  - $type: ObstacleComponent
+    lanesHeight: 1
+    width: 64
+    order: 10
+    origin: { x: 0.5, y: 1 }

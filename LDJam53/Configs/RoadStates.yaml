@@ -1,0 +1,104 @@
+﻿sets:
+- id: GameController
+  states:
+  - id: intro
+    exits:
+    - destination: gameStart
+      conditions:
+      - $type: TotalTimed
+        totalTimed: 1000
+  - id: gameStart
+    activities:
+    - $type: Concurrent
+      activities:
+      - $type: SetState
+        target: //layerPlay/player
+        state: MoveRight
+      - $type: EnableNode
+        target: //layerPlay/lineManager
+        enabled: true
+    exits:
+    - destination: gameLoop
+      conditions:
+      - $type: OnStateFinished
+  - id: gameLoop
+    exits:
+    - destination: OutroFailed
+      conditions:
+      - $type: LineCollision
+        target: //layerPlay/player
+        lineManager: ../lineManager
+    - destination: OutroSuccess
+      conditions:
+      - $type: TotalDistance
+        track: //layerPlay/player
+        distance: 15000
+  - id: OutroSuccess
+    exits:
+    - destination: Finish
+      conditions:
+      - $type: TotalTimed
+        totalTimed: 2000
+  - id: OutroFailed
+    exits:
+    - destination: Menu
+      conditions:
+      - $type: TotalTimed
+        totalTimed: 2000
+  - id: Finish
+    activities:
+    - $type: ApplyDeliveryQuest
+      quest: //
+      target: //layerPlay/player
+    - $type: LoadSceneFromQuest
+      destination: true
+  - id: Menu
+    activities:
+    - $type: LoadScene
+      scene: Menu
+- id: Player
+  states: 
+  - id: Default
+  - id: MoveRight
+    activities: 
+    - $type: SetAnimation
+      target: //layerPlay/player
+      duration: 100
+      loop: true
+      textures:
+      - Characters/Player_Run_01
+      - Characters/Player_Run_02
+      - Characters/Player_Run_03
+      - Characters/Player_Run_04
+      - Characters/Player_Run_05
+      - Characters/Player_Run_06
+      - Characters/Player_Run_07
+      - Characters/Player_Run_08
+    - $type: MoveRightOnLane
+      lineManager: ../lineManager
+      speed: 250
+      speedIncreaseInterval: 1000
+      speedIncreaseMultiplier: 1.01
+      order: 10
+    exits:
+    - destination: Died
+      conditions:
+      - $type: LineCollision
+        lineManager: ../lineManager
+  - id: Died
+    activities: 
+    - $type: SetAnimation
+      target: //layerPlay/player
+      duration: 100
+      loop: false
+      textures:
+      - Characters/Player_Death_01
+- id: Cart
+  states: 
+  - id: Default
+    activities: 
+    - $type: MoveRight
+      speed: 120
+- id: Rabbit
+  states: 
+  - id: Idle

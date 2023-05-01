@@ -1,0 +1,7 @@
+﻿id: RoadGameController
+root: 
+  id: gameController
+  components:
+  - $type: StateComponent
+    set: GameController
+    state: intro
